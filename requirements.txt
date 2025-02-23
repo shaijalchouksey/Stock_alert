@@ -1,0 +1,13 @@
+streamlit
+pandas
+pyodbc
+sqlalchemy
+requests
+beautifulsoup4
+yfinance
+matplotlib
+plotly
+google-auth
+google-auth-oauthlib
+google-auth-httplib2
+google-api-python-client
