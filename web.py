@@ -76,6 +76,9 @@ threshold = st.number_input("Set a price threshold:", min_value=0.0, value=100.0
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 CLIENT_SECRET_FILE = r"C:\\Users\\abhib\\Desktop\\Stock Market\\client_secret.json"
 
+ALPHA_VANTAGE_API_KEY = "L6TXKYFD2SU6ZMXX"  # Replace with your actual API key
+
+
 def send_email_oauth2(subject, body, recipient_emails):
     try:
         flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
