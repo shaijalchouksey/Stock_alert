@@ -23,7 +23,6 @@ if not ALPHA_VANTAGE_API_KEY:
 # ✅ Database connection settings
 server = "DESKTOP-OSJVKIN\\SQLEXPRESS"
 database = "stock_data"
-
 try:
     engine = create_engine(f"mssql+pyodbc://{server}/{database}?driver=SQL+Server")
     query = "SELECT * FROM dbo.stock_data ORDER BY timestamp DESC"
