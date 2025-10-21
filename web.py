@@ -88,10 +88,8 @@ def send_email_oauth2(subject, body, recipient_emails):
         message["To"] = ", ".join(recipient_emails)
         message["Subject"] = subject
         message.attach(MIMEText(body, "plain"))
-
         raw_message = base64.urlsafe_b64encode(message.as_bytes()).decode()
         service.users().messages().send(userId="me", body={"raw": raw_message}).execute()
-
         st.success(f"📧 Email sent successfully to: {', '.join(recipient_emails)}")
     except Exception as e:
         st.error(f"❌ Failed to send email: {e}")
