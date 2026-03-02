@@ -58,10 +58,10 @@ stock_symbol = st.text_input("Enter Stock Symbol (e.g., AAPL, TSLA)", value="AAP
 if st.button("Fetch Data"):
     stock_info = fetch_stock_data(stock_symbol)
     if stock_info:
-        st.success(f"✅ Latest price for {stock_symbol}: {stock_info['price']} USD")
+        st.success(f" Latest price for {stock_symbol}: {stock_info['price']} USD")
         st.write(stock_info)
 
-# ✅ Email Alert Section
+#  Email Alert Section
 st.subheader(" Get Stock Alerts via Email")
 email = st.text_area("Enter recipient email(s) (comma-separated):")
 recipient_list = [e.strip() for e in email.split(",") if e.strip()]
@@ -89,9 +89,9 @@ def send_email_oauth2(subject, body, recipient_emails):
         service.users().messages().send(userId="me", body={"raw": raw_message}).execute()
         st.success(f"📧 Email sent successfully to: {', '.join(recipient_emails)}")
     except Exception as e:
-        st.error(f"❌ Failed to send email: {e}")
+        st.error(f" Failed to send email: {e}")
 
-if st.button("🔔 Set Alert") and recipient_list:
+if st.button(" Set Alert") and recipient_list:
     try:
         current_price = df[df["symbol"] == selected_alert_stock]["price"].iloc[-1]
         if current_price >= threshold:
@@ -103,5 +103,5 @@ if st.button("🔔 Set Alert") and recipient_list:
         else:
             st.info(f"No alert sent. {selected_alert_stock} is currently at {current_price}, below your threshold of {threshold}.")
     except IndexError:
-        st.warning("⚠️ No stock data available for the selected stock.")
+        st.warning(" No stock data available for the selected stock.")
 
