@@ -61,14 +61,12 @@ if st.button("Fetch Data"):
         st.success(f" Latest price for {stock_symbol}: {stock_info['price']} USD")
         st.write(stock_info)
 
-#  Email Alert Section
 st.subheader(" Get Stock Alerts via Email")
 email = st.text_area("Enter recipient email(s) (comma-separated):")
 recipient_list = [e.strip() for e in email.split(",") if e.strip()]
 selected_alert_stock = st.selectbox("Select a stock for email alerts:", df["symbol"].unique() if not df.empty else [])
 threshold = st.number_input("Set a price threshold:", min_value=0.0, value=100.0, step=1.0)
 
-#  Gmail API-based Email Notification
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
 CLIENT_SECRET_FILE = r"C:\\Users\\abhib\\Desktop\\Stock Market\\client_secret.json"
 
@@ -80,7 +78,6 @@ def send_email_oauth2(subject, body, recipient_emails):
         flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
         creds = flow.run_local_server(port=0)
         service = build("gmail", "v1", credentials=creds)
-
         message = MIMEMultipart()
         message["To"] = ", ".join(recipient_emails)
         message["Subject"] = subject
@@ -90,7 +87,6 @@ def send_email_oauth2(subject, body, recipient_emails):
         st.success(f"📧 Email sent successfully to: {', '.join(recipient_emails)}")
     except Exception as e:
         st.error(f" Failed to send email: {e}")
-
 if st.button(" Set Alert") and recipient_list:
     try:
         current_price = df[df["symbol"] == selected_alert_stock]["price"].iloc[-1]
