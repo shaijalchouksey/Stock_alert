@@ -25,6 +25,7 @@ try:
     engine = create_engine(f"mssql+pyodbc://{server}/{database}?driver=SQL+Server")
     query = "SELECT * FROM dbo.stock_data ORDER BY timestamp DESC"
     df = pd.read_sql(query, engine)
+    
 except Exception as e:
     st.warning(" Could not connect to the database. Showing empty data.")
     df = pd.DataFrame(columns=["symbol", "price", "timestamp"])
@@ -100,4 +101,3 @@ if st.button(" Set Alert") and recipient_list:
             st.info(f"No alert sent. {selected_alert_stock} is currently at {current_price}, below your threshold of {threshold}.")
     except IndexError:
         st.warning(" No stock data available for the selected stock.")
-
